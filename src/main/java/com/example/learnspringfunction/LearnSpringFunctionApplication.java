@@ -11,22 +11,28 @@ import java.util.function.Supplier;
 @SpringBootApplication
 public class LearnSpringFunctionApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(LearnSpringFunctionApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(LearnSpringFunctionApplication.class, args);
+    }
 
-	@Bean
-	public Function<String, String> function() {
-		return input -> "You send: <"+ input + ">";
-	}
+    @Bean
+    public Function<String, String> function() {
+        return input -> "You send: <" + input + ">";
+    }
 
-	@Bean
-	public Consumer<String> consume() {
-		return input -> System.out.println("Input is " + input);
-	}
+    @Bean
+    public Consumer<String> consume() {
+        return new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+                System.out.println("input = " + s);
+            }
+        };
+//		return input -> System.out.println("Input is " + input);
+    }
 
-	@Bean
-	public Supplier<String> supply() {
-		return () -> "Hello Youtube!";
-	}
+    @Bean
+    public Supplier<String> supply() {
+        return () -> "Hello Youtube!";
+    }
 }
